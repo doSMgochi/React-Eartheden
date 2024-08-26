@@ -1,0 +1,380 @@
+@charset "UTF-8";
+
+/* 모달 테이블 */
+section.main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  div.table-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    table.list {
+      width: 100%;
+      max-width: 800px;
+      border-collapse: collapse;
+      tbody {
+        tr {
+          &:hover {
+            background-color: #ddd;
+          }
+        }
+        tr[data-lat][data-lng] {
+          cursor: pointer;
+        }
+      }
+      th,
+      td {
+        text-align: center;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #555;
+        color: white;
+        font-weight: bold;
+      }
+
+      td {
+        border: 1px solid #eee;
+      }
+    }
+  }
+}
+
+/* 메인 컨테이너 */
+div.snap-container {
+  overflow-y: auto;
+  height: 100vh;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  div.background {
+    section.search {
+      select,
+      input,
+      button {
+        font-family: "Gowun Dodum", sans-serif;
+        width: 300px;
+        margin: 5px auto;
+        padding: 15px;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.6);
+        box-shadow: 0 0 5px 3px white;
+      }
+      button {
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+      }
+
+      input::placeholder {
+        text-align: center;
+      }
+      select {
+        text-align: center;
+        text-align-last: center;
+      }
+    }
+  }
+}
+
+div.modal-header {
+  text-align: center;
+}
+
+div.snap-container::-webkit-scrollbar {
+  display: none;
+}
+
+div.mg-10 {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+div.background {
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+div.background.restroom {
+  background-image: url(../../public/images/2.jpg);
+}
+div.background.trash-can {
+  background-image: url(../../public/images/3.jpg);
+}
+div.background.wifi {
+  background-image: url(../../public/images/4.jpg);
+}
+
+div.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: 1;
+}
+
+section.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+
+  h2 {
+    font-weight: 100;
+    color: white;
+    font-size: 4rem;
+    text-shadow: 0px 0px 5px white;
+    font-family: "Black Han Sans", sans-serif;
+    margin-top: 20px;
+  }
+  h6 {
+    font-size: 2rem;
+    font-family: "Gowun Dodum", sans-serif;
+    color: black;
+    text-shadow: 0px 0px 3px white;
+  }
+}
+
+section.search.restroom {
+  left: 65vw;
+  top: 50vh;
+}
+
+section.search.trash-can {
+  left: 25vw;
+  top: 40vh;
+}
+
+section.search.wifi {
+  left: 50vw;
+  top: 45vh;
+}
+
+div.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+div.modal-content {
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 15px;
+  scrollbar-width: none;
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 800px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+span.close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+span.close:hover,
+span.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.custom-select-wrapper {
+  position: relative;
+  user-select: none;
+  width: 300px;
+  margin: 10px auto;
+}
+
+.custom-select {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-select-trigger {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Gowun Dodum", sans-serif;
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 5px 3px white;
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.custom-options {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  margin-top: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  max-height: 200px;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.custom-option {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.custom-option:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.custom-select.open .custom-options {
+  display: flex;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid black;
+}
+
+#scrollIcon {
+  position: fixed;
+  bottom: 80px;
+  right: 80px;
+  font-size: 3rem;
+  color: white;
+  animation: bounce 2s infinite;
+  z-index: 1000;
+}
+
+.default-icon {
+  width: 85px;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  section.search.restroom {
+    left: 60vw;
+    top: 45vh;
+  }
+
+  section.search.trash-can {
+    left: 30vw;
+    top: 35vh;
+  }
+
+  section.search.wifi {
+    left: 50vw;
+    top: 40vh;
+  }
+}
+
+@media (max-width: 768px) {
+  section.search.restroom {
+    left: 55vw;
+    top: 40vh;
+  }
+
+  section.search.trash-can {
+    left: 35vw;
+    top: 30vh;
+  }
+
+  section.search.wifi {
+    left: 50vw;
+    top: 35vh;
+  }
+}
+
+@media (max-width: 480px) {
+  section.search.restroom {
+    left: 50vw;
+    top: 45vh;
+  }
+
+  section.search.trash-can {
+    left: 50vw;
+    top: 45vh;
+  }
+
+  section.search.wifi {
+    left: 50vw;
+    top: 45vh;
+  }
+}
